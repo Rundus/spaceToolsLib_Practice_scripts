@@ -35,8 +35,26 @@ key_names = data_dict.keys()
 
 # [2] get a particular dataset
 data1 = data_dict['Differential_Number_Flux'][0]
-print(data1)
+# print(data1)
 
 # [3] Get the attributes of a particular dataset
 attrs1 = data_dict['Differential_Number_Flux'][1]
-print(attrs1)
+# print(attrs1)
+
+
+# [4] USE THE DEEPCOPY FUNCTION!!!!
+from copy import deepcopy
+# a = [1,2,3]
+# print('a',a)
+# b = a[1:3]
+# print('b',b)
+# a[1]=0
+# print('b',b)
+
+# Make two variables which are totally independent from one another
+var1 = deepcopy(data_dict['Differential_Number_Flux'][0])
+var2 = 5*deepcopy(var1)
+print(var1[0][0][0])
+print(var2[0][0][0])
+
+
