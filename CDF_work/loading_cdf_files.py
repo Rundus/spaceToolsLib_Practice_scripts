@@ -1,8 +1,3 @@
-# todo list
-# [1] how to use spacetoolslib to load .cdf files
-# [2] how to read .txt files of the MPI data
-# [3]
-
 # imports
 import spaceToolsLib as stl
 
@@ -42,7 +37,7 @@ attrs1 = data_dict['Differential_Number_Flux'][1]
 # print(attrs1)
 
 
-# [4] USE THE DEEPCOPY FUNCTION!!!!
+# [4] USE THE DEEPCOPY FUNCTION to avoid python's weird handling of dictionaries!
 from copy import deepcopy
 # a = [1,2,3]
 # print('a',a)
