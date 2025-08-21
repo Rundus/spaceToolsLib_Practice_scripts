@@ -13,13 +13,17 @@ import numpy as np
 import io
 
 
+# Time your code
+# start_time = time.time()
+
+
 
 ### MAIN FUNCTION ###
 def txt_raw_MPI_Data_to_cdf():
 
     # Load in the .txt files
     path_to_data = 'C:\Data\ACESII\L3\MPI\low\\'
-    data_file_names = glob(path_to_data + '*MPI*')
+    data_file_names = glob(path_to_data + '*MPI*' +'*.txt')
 
     # prepare the output
     data_dict_output = {}
@@ -36,15 +40,25 @@ def txt_raw_MPI_Data_to_cdf():
             temp_data = np.array(temp_data).T
 
         # APPEND file data into data_dict_output
+        if 'MPI1' in txtfile:
+            counter = 1
+        elif 'MPI2' in txtfile:
+            counter = 2
+        elif 'MPI3' in txtfile:
+            counter = 3
+        elif 'MPI4' in txtfile:
+            counter = 4
+
         data_dict_output = {**data_dict_output,
-                            **{'Epoch':[np.array(temp_data[0]), {'LABLAXIS':'Epoch','UNITS':None,'DEPEND_0':'Epoch'}],
-                               'Vx_rkt':[np.array(temp_data[1]), {'LABLAXIS':'Vx in rocket frame','UNITS':'m/s','DEPEND_0':'Epoch'}],
-                               'Vy_rkt':[np.array(temp_data[2]), {'LABLAXIS':'Vy in rocket frame','UNITS':'m/s','DEPEND_0':'Epoch'}]}
+                            **{f'Epoch_MPI{counter}':[np.array(temp_data[0]), {'LABLAXIS':'Epoch','UNITS':None,'DEPEND_0':f'Epoch_MPI{counter}'}],
+                               f'Vx_rkt_MPI{counter}':[np.array(temp_data[1]), {'LABLAXIS':'Vx in rocket frame','UNITS':'m/s','DEPEND_0':f'Epoch_MPI{counter}'}],
+                               f'Vy_rkt_MPI{counter}':[np.array(temp_data[2]), {'LABLAXIS':'Vy in rocket frame','UNITS':'m/s','DEPEND_0':f'Epoch_MPI{counter}'}]}
                             }
 
-    # organize the data_dict_output
-
     # write out the data
+    outputPath = 'C:\Data\ACESII\L3\MPI\low\\'
+    file_out_name = 'ACESII_36364_l3_MPI.cdf'
+    stl.outputCDFdata(outputPath=outputPath+file_out_name, data_dict=data_dict_output)
 
 
 ### EXECUTE ###
