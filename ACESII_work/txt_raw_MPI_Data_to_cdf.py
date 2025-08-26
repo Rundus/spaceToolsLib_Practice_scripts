@@ -69,7 +69,7 @@ def txt_raw_MPI_Data_to_cdf():
     # write out the data
     stl.prgMsg('Writing out the data')
     outputPath = 'C:\Data\ACESII\L3\MPI\low\\'
-    file_out_name = 'ACESII_36364_l3_MPI.cdf'
+    file_out_name = 'ACESII_36364_l3_MPI_rktFrm.cdf'
     stl.outputCDFdata(outputPath=outputPath+file_out_name, data_dict=data_dict_output)
     stl.Done(start_time)
 
